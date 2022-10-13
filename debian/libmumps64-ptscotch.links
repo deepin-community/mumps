@@ -1,0 +1,12 @@
+usr/lib/${DEB_HOST_MULTIARCH}/libcmumps_64pord_ptscotch.a             usr/lib/${DEB_HOST_MULTIARCH}/libcmumps_64_ptscotch.a
+usr/lib/${DEB_HOST_MULTIARCH}/libdmumps_64pord_ptscotch.a	      usr/lib/${DEB_HOST_MULTIARCH}/libdmumps_64_ptscotch.a
+usr/lib/${DEB_HOST_MULTIARCH}/libmumps_common_64pord_ptscotch.a	      usr/lib/${DEB_HOST_MULTIARCH}/libmumps_common_64_ptscotch.a
+usr/lib/${DEB_HOST_MULTIARCH}/libpord_64pord_ptscotch.a		      usr/lib/${DEB_HOST_MULTIARCH}/libpord_64_ptscotch.a
+usr/lib/${DEB_HOST_MULTIARCH}/libsmumps_64pord_ptscotch.a	      usr/lib/${DEB_HOST_MULTIARCH}/libsmumps_64_ptscotch.a
+usr/lib/${DEB_HOST_MULTIARCH}/libzmumps_64pord_ptscotch.a	      usr/lib/${DEB_HOST_MULTIARCH}/libzmumps_64_ptscotch.a
+usr/lib/${DEB_HOST_MULTIARCH}/libcmumps_64pord_ptscotch.so	      usr/lib/${DEB_HOST_MULTIARCH}/libcmumps_64_ptscotch.so
+usr/lib/${DEB_HOST_MULTIARCH}/libdmumps_64pord_ptscotch.so	      usr/lib/${DEB_HOST_MULTIARCH}/libdmumps_64_ptscotch.so
+usr/lib/${DEB_HOST_MULTIARCH}/libmumps_common_64pord_ptscotch.so      usr/lib/${DEB_HOST_MULTIARCH}/libmumps_common_64_ptscotch.so
+usr/lib/${DEB_HOST_MULTIARCH}/libpord_64pord_ptscotch.so	      usr/lib/${DEB_HOST_MULTIARCH}/libpord_64_ptscotch.so
+usr/lib/${DEB_HOST_MULTIARCH}/libsmumps_64pord_ptscotch.so	      usr/lib/${DEB_HOST_MULTIARCH}/libsmumps_64_ptscotch.so
+usr/lib/${DEB_HOST_MULTIARCH}/libzmumps_64pord_ptscotch.so            usr/lib/${DEB_HOST_MULTIARCH}/libzmumps_64_ptscotch.so

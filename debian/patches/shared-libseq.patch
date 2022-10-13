@@ -1,0 +1,45 @@
+Create a shared version of the sequential library, MUST BE LAST IN SERIES
+
+Index: mumps/libseq/Makefile
+===================================================================
+--- mumps.orig/libseq/Makefile	2021-09-15 13:37:54.057627291 +0200
++++ mumps/libseq/Makefile	2021-09-15 13:37:54.049627251 +0200
+@@ -9,15 +9,20 @@
+ topdir = ..
+ include $(topdir)/Makefile.inc
+ 
+-libmpiseq: libmpiseq$(PLAT)$(LIBEXT)
++libmpiseq: libmpiseq$(PLAT).a libmpiseq$(PLAT).so
+ 
+-libmpiseq$(PLAT)$(LIBEXT): mpi.o mpic.o elapse.o
+-	$(AR)$@ mpi.o mpic.o elapse.o
++libmpiseq$(PLAT).a: mpi.o mpic.o elapse.o
++	$(AR) $@ mpi.o mpic.o elapse.o
+ 	$(RANLIB) $@
++libmpiseq$(PLAT).so: mpi.o mpic.o elapse.o
++	$(FC) $(OPTL) -shared $^ -Wl,-soname,libmpiseq$(PLAT)-$(SOVERSION).so -o libmpiseq$(PLAT)-$(VERSION).so -Wl,-z,defs
++	ln -s libmpiseq$(PLAT)-$(VERSION).so libmpiseq$(PLAT)-$(SOVERSION).so
++	ln -s libmpiseq$(PLAT)-$(VERSION).so $@
++
+ .f.o:
+-	$(FC) $(OPTF)              -c $*.f $(OUTF)$*.o
++	$(FC) $(OPTF)              -fPIC -c $*.f $(OUTF)$*.o
+ .c.o:
+-	$(CC) $(OPTC) $(CDEFS) -I. -c $*.c $(OUTC)$*.o
++	$(CC) $(OPTC) $(CDEFS) -I. -fPIC -c $*.c $(OUTC)$*.o
+ 
+ clean:
+-	$(RM) *.o *$(LIBEXT)
++	$(RM) *.o *.a *.so
+Index: mumps/Makefile
+===================================================================
+--- mumps.orig/Makefile	2021-09-15 13:37:54.057627291 +0200
++++ mumps/Makefile	2021-09-15 13:37:54.049627251 +0200
+@@ -51,6 +51,7 @@
+ 
+ libseqneeded:
+ 	(cd libseq; $(MAKE))
++	cp libseq/lib* $(libdir)
+ 
+ # Build the libpord.a library and copy it into $(topdir)/lib
+ $(libdir)/libpord$(PLAT).a:

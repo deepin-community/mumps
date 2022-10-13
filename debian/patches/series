@@ -1,0 +1,7 @@
+makefile_version.patch
+shared-pord.patch
+shared-mumps.patch
+shared-libseq.patch
+#scotch.patch
+#ptscotch.patch
+examples-mpilibs.patch

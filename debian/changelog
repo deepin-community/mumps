@@ -1,0 +1,385 @@
+mumps (5.4.1-2) unstable; urgency=medium
+
+  * Team upload.
+  * release MUMPS 5.4 to unstable
+
+ -- Drew Parsons <dparsons@debian.org>  Sun, 17 Oct 2021 08:59:35 +0200
+
+mumps (5.4.1-1exp1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * Standards-Version: 4.6.0
+
+ -- Drew Parsons <dparsons@debian.org>  Wed, 15 Sep 2021 13:39:26 +0200
+
+mumps (5.4.0-1exp1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release (ABI bump from 5.3 to 5.4).
+
+ -- Drew Parsons <dparsons@debian.org>  Sun, 18 Apr 2021 19:25:42 +0200
+
+mumps (5.3.5-2) unstable; urgency=medium
+
+  * Team upload.
+  * libmumps64-seq-dev Depends: libmumps-64pord-seq-5.3
+    (not libmumps-seq-dev, libmumps-seq-5.3). Closes: #985514.
+  * Standards-Version: 4.5.1
+
+ -- Drew Parsons <dparsons@debian.org>  Sat, 20 Mar 2021 04:52:40 +0100
+
+mumps (5.3.5-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+
+ -- Drew Parsons <dparsons@debian.org>  Thu, 29 Oct 2020 12:11:59 +0800
+
+mumps (5.3.4-1exp1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * MUMPS is now ABI-compatible in the minor version.
+    Provide new packages as libmumps-5.3, etc instead of libmumps-5.3.4
+    - install library file as full version filename libmump*-X.Y.Z.so
+      and provide soname symlink for libmump*-X.Y.so
+  * Provide unversioned (-dev) and soname-versioned symlinks to
+    libmpiseq (packages libmumps-seq-dev and libmumps-seq-5.3
+    and their 64-bit counterparts)
+  * debian patch makefile_version.patch sets VERSION (X.Y.Z) and
+    SOVERSION (X.Y) in Makefile for building shared libraries.
+
+ -- Drew Parsons <dparsons@debian.org>  Fri, 02 Oct 2020 00:38:24 +0800
+
+mumps (5.3.3-2) unstable; urgency=medium
+
+  * Team upload.
+  * remove deprecated tags in debian/source/lintian-overrides
+
+ -- Drew Parsons <dparsons@debian.org>  Thu, 01 Oct 2020 01:54:11 +0800
+
+mumps (5.3.3-1exp2) experimental; urgency=medium
+
+  * Team upload.
+  * provide new versioned package names for new release
+  * update shared-*.patch to set SOVERSION as a make variable
+
+ -- Drew Parsons <dparsons@debian.org>  Fri, 10 Jul 2020 02:24:21 +0800
+
+mumps (5.3.3-1exp1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * put Adam C. Powell, IV's name in quotes in past changelog entries
+
+ -- Drew Parsons <dparsons@debian.org>  Fri, 10 Jul 2020 00:43:42 +0800
+
+mumps (5.3.1-5) unstable; urgency=medium
+
+  * Team upload.
+  * libmumps-headers-dev Breaks/Replaces: libmumps-seq-dev (<< 5.3.1-3)
+    (and libmumps-dev). Closes: #962831.
+
+ -- Drew Parsons <dparsons@debian.org>  Mon, 15 Jun 2020 19:17:36 +0800
+
+mumps (5.3.1-4) unstable; urgency=medium
+
+  * Team upload.
+  * ensure mumps_int_def.h is built for arch-independent builds
+
+ -- Drew Parsons <dparsons@debian.org>  Sun, 14 Jun 2020 11:58:20 +0800
+
+mumps (5.3.1-3) unstable; urgency=medium
+
+  * Team upload.
+  * add -fallow-argument-mismatch to OPTF in Makefile*.inc (via
+    OPTF_DEBIAN set conditionally in debian/rules) to allow build to
+    proceed with gcc-10. Closes: #957570.
+
+ -- Drew Parsons <dparsons@debian.org>  Sat, 13 Jun 2020 13:38:28 +0800
+
+mumps (5.3.1-2exp1) experimental; urgency=medium
+
+  * Team upload.
+  * Provide 64-bit packages. Closes: #961185.
+    Currently this is 64-bit PORD ordering (-DPORD_INTSIZE64)
+    not a full all-integer 64-bit build.
+    The libmumps64*-dev packages provide *_64.so links to link against:
+     -ldmumps_64 -lzmumps_64 -lsmumps_64 -lcmumps_64 -lmumps_common_64 -lpord_64
+    (or _64_${PLAT}.so variants with PLAT = ptscotch, scotch or seq.
+    .a variants are also available for static linking.
+  * Provide headers in common (arch-all) libmumps-headers-dev package.
+
+ -- Drew Parsons <dparsons@debian.org>  Sun, 31 May 2020 20:07:46 +0800
+
+mumps (5.3.1-2) unstable; urgency=medium
+
+  * Team upload.
+  * debhelper compatibility level 13
+
+ -- Drew Parsons <dparsons@debian.org>  Sat, 30 May 2020 17:04:20 +0800
+
+mumps (5.3.1-1exp2) experimental; urgency=medium
+
+  * Team upload.
+  * debian/tests:
+    - run mpi tests on 3 cpu, allow oversubscribing.
+    - run serial and MPI tests separately
+  * skip buildtime MPI tests for hurd-i386 and m68k
+  * skip all tests on sh
+
+ -- Drew Parsons <dparsons@debian.org>  Tue, 21 Apr 2020 23:26:29 +0800
+
+mumps (5.3.1-1exp1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * Standards-Version: 4.5.0
+  * add debian/tests (autopkgtest) testing MUMPS examples
+    - run examples also in place of dh_auto_test
+
+ -- Drew Parsons <dparsons@debian.org>  Fri, 17 Apr 2020 19:23:35 +0800
+
+mumps (5.2.1-2) unstable; urgency=medium
+
+  * Team upload.
+  * Standards-Version: 4.4.1
+
+ -- Drew Parsons <dparsons@debian.org>  Mon, 16 Dec 2019 09:23:05 +1100
+
+mumps (5.2.1-1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+
+ -- Drew Parsons <dparsons@debian.org>  Mon, 24 Jun 2019 14:34:47 +0800
+
+mumps (5.2.0-1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * Standards-Version: 4.3.0
+  * debhelper compatibility level 12
+  * drop Build-Dependency on dh-exec (no longer maintained, use direct
+    shell scripts instead)
+
+ -- Drew Parsons <dparsons@debian.org>  Sun, 26 May 2019 14:31:16 +0800
+
+mumps (5.1.2-5) unstable; urgency=medium
+
+  * Team upload.
+  * debian/Makefile.*.inc: get OPTF, OPTL, OPTC from dpkg-buildflags.
+    This should make debug symbols usable.
+  * debian/Makefile.*.inc: remove `-I/usr/include/mpi` from compiler flags.
+    This caused compiler warnings as the directory does not exist.
+  * debian/rules: remove redundant `--parallel` option from `dh`
+    invocation.  Building in parallel is already the default since
+    debhelper 10.
+  * debian/control: update Vcs-* fields
+  * debian/control: remove newline from uploader name
+
+ -- Ansgar Burchardt <ansgar@debian.org>  Mon, 18 Mar 2019 09:17:24 +0100
+
+mumps (5.1.2-4) unstable; urgency=medium
+
+  * Team upload.
+  * link scalapack using MUMPS_MPI not openmpi (could be mpich)
+
+ -- Drew Parsons <dparsons@debian.org>  Mon, 25 Dec 2017 07:10:24 +1100
+
+mumps (5.1.2-3) unstable; urgency=medium
+
+  * Team upload.
+  * use mpicc, mpifort to build parallel MUMPS (and PTScotch support)
+    rather than using pkg-config mpi-fort, since mpi-fort.pc is not
+    available for mpich builds (m68k,sh4). Closes: #884939.
+
+ -- Drew Parsons <dparsons@debian.org>  Sun, 24 Dec 2017 23:52:28 +1100
+
+mumps (5.1.2-2) unstable; urgency=medium
+
+  * Team upload.
+  * Standards-Version: 4.1.2
+
+ -- Drew Parsons <dparsons@debian.org>  Tue, 19 Dec 2017 14:19:01 +0800
+
+mumps (5.1.2-1exp1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream version.
+  * List OpenBLAS and ATLAS as alternative Build-Deps to provide BLAS
+    and LAPACK.
+  * Standards-Version: 4.1.1
+  * debian/rules: create ./lib at build time, needed for build and
+    present in upstream tarball, but not imported by gbp. 
+  * debian/control: Priority: optional not extra
+
+ -- Drew Parsons <dparsons@debian.org>  Wed, 29 Nov 2017 21:40:31 +0800
+
+mumps (5.1.1-3) unstable; urgency=medium
+
+  * Team upload.
+  * Update for scalapack 2.0. It now includes BLACS, so
+    remove explicit blacs dependencies.
+  * Standards-Version: 4.1.0
+
+ -- Drew Parsons <dparsons@debian.org>  Sun, 10 Sep 2017 09:04:21 +0800
+
+mumps (5.1.1-2) unstable; urgency=medium
+
+  * Team upload.
+  * Add copyright details for src/ana_orderings.F
+    (LGPL/CeCill-C/BSD-3). Closes: #859492.
+  * Standards-Version: 4.0.0
+  * debhelper compatibility level 10
+
+ -- Drew Parsons <dparsons@debian.org>  Fri, 14 Jul 2017 16:18:20 +0800
+
+mumps (5.1.1-1exp1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream version. Closes: #825824.
+    - copyright now licenced under CeCILL-C
+  * Standards-Version: 3.9.8
+  * Place libs in multiarch subdirs. Build-Depends: dh-exec (>=0.3).
+
+ -- Drew Parsons <dparsons@debian.org>  Wed, 29 Mar 2017 21:17:12 +0800
+
+mumps (4.10.0.dfsg-4) unstable; urgency=medium
+
+  * Team upload.
+  * Stop calling directly quilt, drop build-dep.
+  * Run wrap-and-sort.
+  * Fix FTBFS with openmpi 1.10.  Closes: #813791
+  * Remove debian/README.source as now useless.
+  * Bump debhelper compat level to 9 and use the dh sequencer.
+  * Bump Standards-Version to 3.9.7, no changes needed.
+  * Canonicalize Vcs-* fields, use https.
+  * Use copyright-format 1.0 as finalized.
+
+ -- Mattia Rizzolo <mattia@debian.org>  Sat, 06 Feb 2016 18:44:41 +0000
+
+mumps (4.10.0.dfsg-3) unstable; urgency=low
+
+  * Added quilt to Build-Depends, seems to be necessary after all.
+
+ -- "Adam C. Powell, IV" <hazelsct@debian.org>  Fri, 30 Dec 2011 13:18:36 -0500
+
+mumps (4.10.0.dfsg-2) unstable; urgency=low
+
+  * Using debhelper quilt commands in clean and build-arch (closes: #653032).
+  * Removed unnecessary quilt Build-Dependency.
+
+ -- "Adam C. Powell, IV" <hazelsct@debian.org>  Fri, 23 Dec 2011 10:32:40 -0500
+
+mumps (4.10.0.dfsg-1) unstable; urgency=low
+
+  * New upstream (closes: #652909).
+  * Rebuild with new mpi-defaults (closes: #652314).
+  * Forward-ported patches, removed now-obsolete tests-shlibs.patch, and added
+    a new patch to link examples to MPI libs properly.
+  * Forward-ported debian/Makefile.*.inc files.
+  * Re-engineered dependencies around specific needs of each library rather
+    than the over-arching $(LIB) library set.
+  * Removed LAPACK dependencies, -scotch and -seq packages' ScaLAPACK and MPI
+    dependencies.
+  * Removed patch debian/rules target, added (empty) build-indep target, and
+    completed clean target.
+  * Bumped Standards-Version.
+  * Changed to debian-science-maintainers maintenance with me as uploader.
+
+ -- "Adam C. Powell, IV" <hazelsct@debian.org>  Thu, 22 Dec 2011 09:56:46 -0500
+
+mumps (4.9.2.dfsg-7) unstable; urgency=low
+
+  * Build-Conflict with ATLAS packages (closes: #620291).
+  * Added VCS to control file.
+
+ -- "Adam C. Powell, IV" <hazelsct@debian.org>  Thu, 31 Mar 2011 17:37:23 -0400
+
+mumps (4.9.2.dfsg-6) unstable; urgency=low
+
+  * Changed to a better MUMPS_MPI variable setting.
+  * Added MPI and Scotch libraries to link with binutils-gold (closes: #604950).
+
+ -- "Adam C. Powell, IV" <hazelsct@debian.org>  Sun, 28 Nov 2010 13:07:54 -0500
+
+mumps (4.9.2.dfsg-5) unstable; urgency=low
+
+  * Moved libmumps-seq-dev headers to their own directory (closes: #585960).
+  * Added patch target and unpatch command to clean target.
+  * Bumped Standards-Version.
+
+ -- "Adam C. Powell, IV" <hazelsct@debian.org>  Sun, 21 Nov 2010 21:42:26 -0500
+
+mumps (4.9.2.dfsg-4) unstable; urgency=low
+
+  * Added liblapack-dev to Build-Depends and changed "-lblas-3gf -llapackgf-3"
+    to "-lblas -llapack" in debian/Makefile*.inc (closes: #577003)
+  * Changed from patch-based approach to library renaming to using $(PLAT), so
+    libmpiseq is not shared between seq and scotch versions (closes: #577046)
+
+ -- "Adam C. Powell, IV" <hazelsct@debian.org>  Sun, 11 Apr 2010 22:25:49 -0400
+
+mumps (4.9.2.dfsg-3) unstable; urgency=low
+
+  [ Christophe Trophime ]
+  * Add scotch support (closes: #576291)
+  * Add ptscotch support 
+  * Add -llapackgf-3 to LIBLAS
+
+  [ "Adam C. Powell, IV" ]
+  * Versioned dependency on libptscotch-dev to make sure to get headers
+  * Changed to source format 3.0 (quilt) and removed *patch rules targets
+  * Clarified short descriptions of packages (closes: #576264)
+  * Bumped Standards-Version
+
+ -- "Adam C. Powell, IV" <hazelsct@debian.org>  Sun, 04 Apr 2010 23:54:36 -0400
+
+mumps (4.9.2.dfsg-2) unstable; urgency=low
+
+  * Fixed bad parentheses in rules ifeq lam/mpich lines (closes: #535276).
+  * Added mpich2 build mechanism.
+
+ -- "Adam C. Powell, IV" <hazelsct@debian.org>  Mon, 04 Jan 2010 13:22:40 -0500
+
+mumps (4.9.2.dfsg-1) unstable; urgency=low
+
+  * New upstream release (closes: #554159).
+  * Changed -lblas to -lblas-3gf in Makefile.*.inc (closes: #557699).
+  * Linking tests to shared instead of static libs (closes: #555759).
+
+ -- "Adam C. Powell, IV" <hazelsct@debian.org>  Mon, 07 Dec 2009 17:56:51 -0500
+
+mumps (4.8.4.dfsg-3) unstable; urgency=low
+
+  [ Roberto C. Sanchez ]
+  * Build against dummy MPI sequential library in addition to building
+    against the standard MPI implementations (OpenMPI and LAM MPI).
+    + Introduce new package: libmumps-seq-4.8.4
+    + Introduce new package: libmumps-seq-dev
+  * Add README.source noting that quilt is used to manage patches
+
+  [ "Adam C. Powell, IV" ]
+  * Changed -lmpi_f77 to a variable depending on MPI implementation
+    (closes: #544752).
+  * Bumped Standards-Version.
+
+ -- "Adam C. Powell, IV" <hazelsct@debian.org>  Sun, 01 Nov 2009 23:56:58 -0500
+
+mumps (4.8.4.dfsg-2) unstable; urgency=low
+
+  * Removed backslash in Build-Depends list (closes: #536917).
+  * Updated debhelper Build-Depends version.
+  * Updated Standards-Version.
+
+ -- "Adam C. Powell, IV" <hazelsct@debian.org>  Mon, 20 Jul 2009 09:13:11 -0400
+
+mumps (4.8.4.dfsg-1) unstable; urgency=low
+
+  * First package (closes: #491024).
+  * Removed doc directory because there's no source for the user's guide.
+
+ -- "Adam C. Powell, IV" <hazelsct@debian.org>  Fri, 29 May 2009 12:49:55 -0400
+

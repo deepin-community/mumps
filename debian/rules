@@ -1,0 +1,127 @@
+#!/usr/bin/make -f
+
+include /usr/share/mpi-default-dev/debian_defaults
+
+export DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
+
+HAS_GCC_10 := $(shell if [ `mpifort -dumpversion` -ge 10 ]; then echo yes; fi )
+ifeq (yes,$(HAS_GCC_10))
+  BUILD_FLAGS_EXTRA = OPTF_DEBIAN="-fallow-argument-mismatch"
+endif
+
+# full 64-bit all integers. We're not ready for this.
+#OPTC_64BIT = -DINTSIZE64 -DPORD_INTSIZE64
+#OPTF_64BIT = -fdefault-integer-8
+
+# 64 bit in MUMPS ordering (PORD) only
+OPTC_64BIT = -DPORD_INTSIZE64
+OPTF_64BIT =
+
+BUILD_FLAGS_64BIT = OPTC_64BIT="$(OPTC_64BIT)" OPTF_64BIT="$(OPTF_64BIT)"
+
+# skip tests on these arches
+ARCH_NO_TEST_LIST = sh4
+
+empty :=
+space := $(empty)$(empty)
+
+# run tests, or not
+RUNTEST=yes
+ifneq (,$(findstring $(space)$(DEB_HOST_ARCH)$(space), $(space)$(ARCH_NO_TEST_LIST)$(space)))
+  RUNTEST=no
+endif
+ifeq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
+  RUNTEST=no
+endif
+
+# skip MPI tests on these arches
+ARCH_NO_MPI_TEST_LIST = hurd-i386 m68k
+
+# run MPI tests, or not
+RUN_MPI_TEST=yes
+ifneq (,$(findstring $(space)$(DEB_HOST_ARCH)$(space), $(space)$(ARCH_NO_MPI_TEST_LIST)$(space)))
+  RUN_MPI_TEST=no
+endif
+
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	cp -f debian/Makefile.seq.inc Makefile.inc
+	dh_auto_clean
+	rm -f src/build_mumps_int_def
+	rm -rf lib Makefile.inc \
+	  libmumps libmumps_seq libmumps_scotch libmumps_ptscotch \
+	  libmumps64 libmumps64_seq libmumps64_scotch libmumps64_ptscotch
+
+override_dh_auto_build-indep:
+	cp -f debian/Makefile.par.inc Makefile.inc
+	cd src; make ../include/mumps_int_def.h
+
+override_dh_auto_build-arch:
+	mkdir lib
+	echo "Building 64-bit MUMPS using $(BUILD_FLAGS_64BIT)"
+	cp -f debian/Makefile.ptscotch.inc Makefile.inc
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) $(BUILD_FLAGS_64BIT) PLAT="_64pord_ptscotch" all
+	cp -a lib libmumps64_ptscotch
+	$(MAKE) clean
+	rm -f Makefile.inc
+	cp -f debian/Makefile.scotch.inc Makefile.inc
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) $(BUILD_FLAGS_64BIT) PLAT="_64pord_scotch" all
+	cp -a lib libmumps64_scotch
+	cp -af libseq/lib* libmumps64_scotch
+	$(MAKE) clean
+	rm -f Makefile.inc
+	cp -f debian/Makefile.seq.inc Makefile.inc
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) $(BUILD_FLAGS_64BIT) PLAT="_64pord_seq" all
+	cp -a lib libmumps64_seq
+	cp -af libseq/lib* libmumps64_seq
+	$(MAKE) clean
+	rm -f Makefile.inc
+	cp -f debian/Makefile.par.inc Makefile.inc
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) $(BUILD_FLAGS_64BIT) PLAT="_64pord" all
+	cp -a lib libmumps64
+	echo "Building 32-bit MUMPS"
+	$(MAKE) clean
+	rm -f Makefile.inc
+	cp -f debian/Makefile.ptscotch.inc Makefile.inc
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) PLAT="_ptscotch" all
+	cp -a lib libmumps_ptscotch
+	$(MAKE) clean
+	rm -f Makefile.inc
+	cp -f debian/Makefile.scotch.inc Makefile.inc
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) PLAT="_scotch" all
+	cp -a lib libmumps_scotch
+	cp -af libseq/lib* libmumps_scotch
+	$(MAKE) clean
+	rm -f Makefile.inc
+	cp -f debian/Makefile.seq.inc Makefile.inc
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) PLAT="_seq" all
+	cp -a lib libmumps_seq
+	cp -af libseq/lib* libmumps_seq
+	$(MAKE) clean
+	rm -f Makefile.inc
+	cp -f debian/Makefile.par.inc Makefile.inc
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) all
+	cp -a lib libmumps
+
+ifeq (yes,$(findstring yes,$(RUNTEST)))
+override_dh_auto_test-indep:
+	echo "Tests run only for arch builds."
+
+override_dh_auto_test-arch:
+	cp -a Makefile.inc Makefile.inc.build || /bin/true
+	LD_LIBRARY_PATH=$(CURDIR)/lib ./debian/tests/mumps-examples-serial
+	LD_LIBRARY_PATH=$(CURDIR)/libmumps64 ./debian/tests/mumps64-examples-serial
+ifeq (yes,$(findstring yes,$(RUN_MPI_TEST)))
+	LD_LIBRARY_PATH=$(CURDIR)/libmumps64 ./debian/tests/mumps64-examples-mpi
+	LD_LIBRARY_PATH=$(CURDIR)/lib ./debian/tests/mumps-examples-mpi
+endif
+	mv Makefile.inc.build Makefile.inc || /bin/true
+endif
+
+override_dh_auto_install-indep:
+	echo "No make-based install required for arch-independent builds."

@@ -1,0 +1,43 @@
+#!/bin/sh -e
+
+DEFAULT_MPI=$( grep ARCH_DEFAULT_MPI_IMPL /usr/share/mpi-default-dev/debian_defaults | sed "s/ARCH_DEFAULT_MPI_IMPL=//" )
+NPROC=3
+
+export OMPI_MCA_plm_rsh_agent=/bin/false
+export OMPI_MCA_rmaps_base_oversubscribe=1
+
+# full 64-bit all integers. We're not ready for this.
+#OPTC_64BIT=-DINTSIZE64 -DPORD_INTSIZE64
+#OPTF_64BIT=-fdefault-integer-8
+
+# 64 bit in MUMPS ordering (PORD) only
+OPTC_64BIT=-DPORD_INTSIZE64
+OPTF_64BIT=
+
+BUILD_FLAGS_64BIT=OPTC_64BIT="${OPTC_64BIT}" OPTF_64BIT="${OPTF_64BIT}"
+
+cd examples
+
+cp ../debian/tests/Makefile.inc ..
+make clean
+make MUMPS_MPI=${DEFAULT_MPI} ${BUILD_FLAGS_64BIT} PLAT="_64pord" all
+
+echo "\n\n=== running 64-bit c_example (MPI) ==="
+mpirun -n $NPROC ./c_example
+mpirun -n $NPROC ./c_example_save_restore
+
+echo "\n\n=== running 64-bit simple test: real, single precision, MPI ==="
+mpirun -n $NPROC ./ssimpletest < input_simpletest_real
+mpirun -n $NPROC ./ssimpletest_save_restore < input_simpletest_real
+
+echo "\n\n=== running 64-bit simple test: real, double precision, MPI ==="
+mpirun -n $NPROC ./dsimpletest < input_simpletest_real
+mpirun -n $NPROC ./dsimpletest_save_restore < input_simpletest_real
+
+echo "\n\n=== running 64-bit simple test: complex, single precision, MPI ==="
+mpirun -n $NPROC ./csimpletest < input_simpletest_cmplx
+mpirun -n $NPROC ./csimpletest_save_restore < input_simpletest_cmplx
+
+echo "\n\n=== running 64-bit simple test: complex, double precision, MPI ==="
+mpirun -n $NPROC ./zsimpletest < input_simpletest_cmplx
+mpirun -n $NPROC ./zsimpletest_save_restore < input_simpletest_cmplx

@@ -1,0 +1,14 @@
+Index: mumps/Makefile
+===================================================================
+--- mumps.orig/Makefile	2021-09-15 13:37:46.797590643 +0200
++++ mumps/Makefile	2021-09-15 13:37:46.789590602 +0200
+@@ -2,6 +2,9 @@
+ #  This file is part of MUMPS 5.4.1, released
+ #  on Tue Aug  3 09:49:43 UTC 2021
+ #
++export VERSION   = 5.4.0
++export SOVERSION = 5.4
++
+ topdir = .
+ libdir = $(topdir)/lib
+ 

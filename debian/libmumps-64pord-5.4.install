@@ -1,0 +1,2 @@
+#! /bin/sh
+echo libmumps64/lib*-*.so usr/lib/${DEB_HOST_MULTIARCH}/

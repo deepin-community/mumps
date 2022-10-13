@@ -1,0 +1,2 @@
+# several variants of libmumps-64pord-scotch are provided by libmumps-64pord-scotch-*
+package-name-doesnt-match-sonames libcmumps-64pord-scotch-* libdmumps-64pord-scotch-* libmpiseq-64pord-scotch-* libmumps-common-64pord-scotch-* libpord-64pord-scotch-* libsmumps-64pord-scotch-* libzmumps-64pord-scotch-*

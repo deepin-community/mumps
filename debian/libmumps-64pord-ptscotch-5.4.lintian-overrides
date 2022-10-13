@@ -1,0 +1,2 @@
+# several variants of libmumps-64pord-ptscotch are provided by libmumps-64pord-ptscotch-*
+package-name-doesnt-match-sonames libcmumps-64pord-ptscotch-* libdmumps-64pord-ptscotch-* libmumps-common-64pord-ptscotch-* libpord-64pord-ptscotch-* libsmumps-64pord-ptscotch-* libzmumps-64pord-ptscotch-*

@@ -1,0 +1,12 @@
+usr/lib/${DEB_HOST_MULTIARCH}/libcmumps_64pord.a            usr/lib/${DEB_HOST_MULTIARCH}/libcmumps_64.a
+usr/lib/${DEB_HOST_MULTIARCH}/libdmumps_64pord.a	    usr/lib/${DEB_HOST_MULTIARCH}/libdmumps_64.a
+usr/lib/${DEB_HOST_MULTIARCH}/libmumps_common_64pord.a	    usr/lib/${DEB_HOST_MULTIARCH}/libmumps_common_64.a
+usr/lib/${DEB_HOST_MULTIARCH}/libpord_64pord.a		    usr/lib/${DEB_HOST_MULTIARCH}/libpord_64.a
+usr/lib/${DEB_HOST_MULTIARCH}/libsmumps_64pord.a	    usr/lib/${DEB_HOST_MULTIARCH}/libsmumps_64.a
+usr/lib/${DEB_HOST_MULTIARCH}/libzmumps_64pord.a	    usr/lib/${DEB_HOST_MULTIARCH}/libzmumps_64.a
+usr/lib/${DEB_HOST_MULTIARCH}/libcmumps_64pord.so	    usr/lib/${DEB_HOST_MULTIARCH}/libcmumps_64.so
+usr/lib/${DEB_HOST_MULTIARCH}/libdmumps_64pord.so	    usr/lib/${DEB_HOST_MULTIARCH}/libdmumps_64.so
+usr/lib/${DEB_HOST_MULTIARCH}/libmumps_common_64pord.so	    usr/lib/${DEB_HOST_MULTIARCH}/libmumps_common_64.so
+usr/lib/${DEB_HOST_MULTIARCH}/libpord_64pord.so		    usr/lib/${DEB_HOST_MULTIARCH}/libpord_64.so
+usr/lib/${DEB_HOST_MULTIARCH}/libsmumps_64pord.so	    usr/lib/${DEB_HOST_MULTIARCH}/libsmumps_64.so
+usr/lib/${DEB_HOST_MULTIARCH}/libzmumps_64pord.so           usr/lib/${DEB_HOST_MULTIARCH}/libzmumps_64.so

@@ -1,0 +1,3 @@
+#! /bin/sh
+echo include/*.h usr/include
+echo libseq/*.h usr/include/mumps_seq

@@ -1,0 +1,4 @@
+#! /bin/sh
+echo libmumps/lib?mumps.* usr/lib/${DEB_HOST_MULTIARCH}/
+echo libmumps/libmumps_common.* usr/lib/${DEB_HOST_MULTIARCH}/
+echo libmumps/libpord.* usr/lib/${DEB_HOST_MULTIARCH}/

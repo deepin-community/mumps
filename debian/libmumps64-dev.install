@@ -1,0 +1,4 @@
+#! /bin/sh
+echo libmumps64/lib?mumps_64pord.* usr/lib/${DEB_HOST_MULTIARCH}/
+echo libmumps64/libmumps_common_64pord.* usr/lib/${DEB_HOST_MULTIARCH}/
+echo libmumps64/libpord_64pord.* usr/lib/${DEB_HOST_MULTIARCH}/

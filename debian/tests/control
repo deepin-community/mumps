@@ -1,0 +1,11 @@
+Tests: mumps-examples-serial
+Depends: @, @builddeps@
+
+Tests: mumps-examples-mpi
+Depends: @, @builddeps@
+
+Tests: mumps64-examples-serial
+Depends: @, @builddeps@
+
+Tests: mumps64-examples-mpi
+Depends: @, @builddeps@

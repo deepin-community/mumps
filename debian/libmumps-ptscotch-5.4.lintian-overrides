@@ -1,0 +1,2 @@
+# several variants of libmumps-ptscotch are provided by libmumps-ptscotch-*
+package-name-doesnt-match-sonames libcmumps-ptscotch-* libdmumps-ptscotch-* libmumps-common-ptscotch-* libpord-ptscotch-* libsmumps-ptscotch-* libzmumps-ptscotch-*

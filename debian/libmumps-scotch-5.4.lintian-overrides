@@ -1,0 +1,2 @@
+# several variants of libmumps-scotch are provided by libmumps-scotch-*
+package-name-doesnt-match-sonames libcmumps-scotch-* libdmumps-scotch-* libmpiseq-scotch-* libmumps-common-scotch-* libpord-scotch-* libsmumps-scotch-* libzmumps-scotch-*

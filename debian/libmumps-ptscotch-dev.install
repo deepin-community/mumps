@@ -1,0 +1,4 @@
+#! /bin/sh
+echo libmumps_ptscotch/lib?mumps_ptscotch.* usr/lib/${DEB_HOST_MULTIARCH}/
+echo libmumps_ptscotch/libmumps_common_ptscotch.* usr/lib/${DEB_HOST_MULTIARCH}/
+echo libmumps_ptscotch/libpord_ptscotch.* usr/lib/${DEB_HOST_MULTIARCH}/

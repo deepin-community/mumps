@@ -1,0 +1,3 @@
+# several variants of libmumps are provided by libmumps-64pord-*
+package-name-doesnt-match-sonames libcmumps-64pord-* libdmumps-64pord-* libmumps-common-64pord-* libpord-64pord-* libsmumps-64pord-* libzmumps-64pord-*
+

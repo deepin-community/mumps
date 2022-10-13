@@ -1,0 +1,2 @@
+# several variants of libmumps-64pord-seq are provided by libmumps-64pord-seq-*
+package-name-doesnt-match-sonames libcmumps-64pord-seq-* libdmumps-64pord-seq-* libmpiseq-64pord-seq-* libmumps-common-64pord-seq-* libpord-64pord-seq-* libsmumps-64pord-seq-* libzmumps-64pord-seq-*
