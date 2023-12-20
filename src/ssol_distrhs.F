@@ -1,9 +1,9 @@
 C
-C  This file is part of MUMPS 5.4.1, released
-C  on Tue Aug  3 09:49:43 UTC 2021
+C  This file is part of MUMPS 5.6.2, released
+C  on Wed Oct 11 09:36:25 UTC 2023
 C
 C
-C  Copyright 1991-2021 CERFACS, CNRS, ENS Lyon, INP Toulouse, Inria,
+C  Copyright 1991-2023 CERFACS, CNRS, ENS Lyon, INP Toulouse, Inria,
 C  Mumps Technologies, University of Bordeaux.
 C
 C  This version of MUMPS is provided to you free of charge. It is
@@ -49,7 +49,7 @@ C
       INTEGER(8), INTENT(OUT):: NB_BYTES_LOC
       INCLUDE 'mpif.h'
       INTEGER :: IERR_MPI
-!$    LOGICAL :: OMP_FLAG
+      LOGICAL :: OMP_FLAG
 !$    INTEGER :: CHUNK, NOMP
 !$    INTEGER(8) :: CHUNK8
       INTEGER :: allocok
@@ -72,6 +72,9 @@ C
       INTEGER :: NB_FS_TOUCHED
       INTEGER :: NBROWSTORECV                
       REAL, PARAMETER :: ZERO = 0.0E0
+#if defined(AVOID_MPI_IN_PLACE)
+      INTEGER :: allocoktmp
+#endif
 !$    NOMP = OMP_GET_MAX_THREADS()
       NB_BYTES_LOC = 0_8
       ALLOCATE( NBROWSTOSEND    (NSLAVES),
@@ -81,9 +84,15 @@ C
       IF (allocok > 0) THEN
         INFO(1) = -13
         INFO(2) = NSLAVES+NSLAVES+NRHS_loc
+      ELSE
+        NB_BYTES_LOC = int(2*NSLAVES+NRHS_loc,8)*KEEP(34)
       ENDIF
-      NB_BYTES_LOC = int(2*NSLAVES+NRHS_loc,8)*KEEP(34)
+#if defined(AVOID_MPI_IN_PLACE)
+      allocoktmp=allocok
+      CALL MPI_ALLREDUCE( allocoktmp, allocok, 1,
+#else
       CALL MPI_ALLREDUCE( MPI_IN_PLACE, allocok, 1,
+#endif
      &                    MPI_INTEGER, MPI_SUM,
      &                    COMM_NODES, IERR_MPI )
       IF (allocok .GT. 0) RETURN
@@ -230,8 +239,10 @@ C
             ILASTNOTTOUCHED=max(ILASTNOTTOUCHED,I)
           ENDIF
         ENDDO
+        OMP_FLAG = .FALSE.
 !$      OMP_FLAG = ( NRHS_COL.GE.KEEP(362) .AND.
 !$   &               NRHS_COL*NBRECORDS .GE. KEEP(363)/2)
+        IF (OMP_FLAG) THEN
 !$OMP PARALLEL DO PRIVATE(I,IRHSCOMP) IF (OMP_FLAG)
         DO K = 1, NRHS_COL
           DO I = IFIRSTNOTTOUCHED, ILASTNOTTOUCHED
@@ -247,6 +258,21 @@ C
           ENDDO
         ENDDO
 !$OMP END PARALLEL DO
+        ELSE
+        DO K = 1, NRHS_COL
+          DO I = IFIRSTNOTTOUCHED, ILASTNOTTOUCHED
+            IRHSCOMP=BUFRECI_ARG(I)
+            IF (.NOT. TOUCHED(IRHSCOMP)) THEN
+              RHSCOMP(IRHSCOMP,K)=ZERO
+            ENDIF
+          ENDDO
+          DO I = 1, NBRECORDS
+            IRHSCOMP=BUFRECI_ARG(I)
+            RHSCOMP(IRHSCOMP,K) = RHSCOMP(IRHSCOMP,K) +
+     &                            BUFRECR_ARG(I,K)
+          ENDDO
+        ENDDO
+        ENDIF
         DO I = 1, NBRECORDS
           IRHSCOMP = BUFRECI_ARG(I)
           IF (.NOT. TOUCHED(IRHSCOMP)) THEN

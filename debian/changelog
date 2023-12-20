@@ -1,3 +1,58 @@
+mumps (5.6.2-2) unstable; urgency=medium
+
+  * Team upload
+  * Explicitly disable LTO to avoid FTBFS when it is enabled
+    (Closes: #1057081)
+
+ -- Graham Inggs <ginggs@debian.org>  Wed, 29 Nov 2023 14:59:10 +0000
+
+mumps (5.6.2-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * dh_auto_clean removes libpord*.a libraries. Closes: #1048347.
+
+ -- Drew Parsons <dparsons@debian.org>  Sat, 04 Nov 2023 12:32:31 +0100
+
+mumps (5.6.1-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+    - debian patch makefile_version.patch VERSION = 5.6.1
+
+ -- Drew Parsons <dparsons@debian.org>  Sun, 06 Aug 2023 13:27:51 +0200
+
+mumps (5.6.0-1exp1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+    - new ABI 5.6
+  * add SONAME = -soname to debian's Makefile.inc fragments
+  * shared-pord.patch: include Makefile.inc in PORD/lib/Makefile
+  * Standards-Version: 4.6.2
+
+ -- Drew Parsons <dparsons@debian.org>  Wed, 17 May 2023 21:56:22 +0200
+
+mumps (5.5.1-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+
+ -- Drew Parsons <dparsons@debian.org>  Wed, 31 Aug 2022 16:55:34 +0200
+
+mumps (5.5.0-1exp1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+    - new ABI 5.5
+  * LIBEXT (.a), LIBEXT_SHARED (.so), FPIC_OPT=-fPIC
+    set in Makefile.inc
+    - apply FPIC_OPT to static builds to keep object files consistent
+      with shared library build
+  * Standards-Version: 4.6.1
+
+ -- Drew Parsons <dparsons@debian.org>  Thu, 12 May 2022 20:32:04 +0200
+
 mumps (5.4.1-2) unstable; urgency=medium
 
   * Team upload.
