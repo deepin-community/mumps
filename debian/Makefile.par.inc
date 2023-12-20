@@ -45,7 +45,10 @@ IORDERINGSC = $(IPORD)
 ################################################################################
 
 PLAT    =
-LIBEXT  = .so
+LIBEXT  = .a
+LIBEXT_SHARED  = .so
+SONAME = -soname
+FPIC_OPT = -fPIC
 OUTC    = -o 
 OUTF    = -o 
 RM = /bin/rm -f

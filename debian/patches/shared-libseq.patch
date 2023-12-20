@@ -2,44 +2,35 @@ Create a shared version of the sequential library, MUST BE LAST IN SERIES
 
 Index: mumps/libseq/Makefile
 ===================================================================
---- mumps.orig/libseq/Makefile	2021-09-15 13:37:54.057627291 +0200
-+++ mumps/libseq/Makefile	2021-09-15 13:37:54.049627251 +0200
-@@ -9,15 +9,20 @@
- topdir = ..
- include $(topdir)/Makefile.inc
+--- mumps.orig/libseq/Makefile	2022-05-07 10:24:05.953920233 +0200
++++ mumps/libseq/Makefile	2022-05-07 10:24:05.945920147 +0200
+@@ -19,7 +19,9 @@
+ 	$(MAKE) FPIC="$(FPIC_OPT)" libmpiseq$(PLAT)$(LIBEXT_SHARED)
  
--libmpiseq: libmpiseq$(PLAT)$(LIBEXT)
-+libmpiseq: libmpiseq$(PLAT).a libmpiseq$(PLAT).so
+ libmpiseq$(PLAT)$(LIBEXT_SHARED): mpi.o mpic.o elapse.o
+-	$(FC) -shared mpi.o mpic.o elapse.o -o libmpiseq$(PLAT)$(LIBEXT_SHARED)
++	$(FC) -shared -Wl,-soname,libmpiseq$(PLAT)-$(SOVERSION).so mpi.o mpic.o elapse.o -o libmpiseq$(PLAT)-$(VERSION)$(LIBEXT_SHARED)
++	ln -s libmpiseq$(PLAT)-$(VERSION)$(LIBEXT_SHARED) libmpiseq$(PLAT)-$(SOVERSION)$(LIBEXT_SHARED)
++	ln -s libmpiseq$(PLAT)-$(VERSION)$(LIBEXT_SHARED) $@
  
--libmpiseq$(PLAT)$(LIBEXT): mpi.o mpic.o elapse.o
--	$(AR)$@ mpi.o mpic.o elapse.o
-+libmpiseq$(PLAT).a: mpi.o mpic.o elapse.o
-+	$(AR) $@ mpi.o mpic.o elapse.o
- 	$(RANLIB) $@
-+libmpiseq$(PLAT).so: mpi.o mpic.o elapse.o
-+	$(FC) $(OPTL) -shared $^ -Wl,-soname,libmpiseq$(PLAT)-$(SOVERSION).so -o libmpiseq$(PLAT)-$(VERSION).so -Wl,-z,defs
-+	ln -s libmpiseq$(PLAT)-$(VERSION).so libmpiseq$(PLAT)-$(SOVERSION).so
-+	ln -s libmpiseq$(PLAT)-$(VERSION).so $@
-+
  .f.o:
--	$(FC) $(OPTF)              -c $*.f $(OUTF)$*.o
-+	$(FC) $(OPTF)              -fPIC -c $*.f $(OUTF)$*.o
- .c.o:
--	$(CC) $(OPTC) $(CDEFS) -I. -c $*.c $(OUTC)$*.o
-+	$(CC) $(OPTC) $(CDEFS) -I. -fPIC -c $*.c $(OUTC)$*.o
+ 	$(FC) $(OPTF) $(FPIC)              -c $*.f $(OUTF)$*.o
+@@ -27,4 +29,4 @@
+ 	$(CC) $(OPTC) $(FPIC) $(CDEFS) -I. -c $*.c $(OUTC)$*.o
  
  clean:
 -	$(RM) *.o *$(LIBEXT)
-+	$(RM) *.o *.a *.so
++	$(RM) *.o *$(LIBEXT) *$(LIBEXT_SHARED)
 Index: mumps/Makefile
 ===================================================================
---- mumps.orig/Makefile	2021-09-15 13:37:54.057627291 +0200
-+++ mumps/Makefile	2021-09-15 13:37:54.049627251 +0200
-@@ -51,6 +51,7 @@
+--- mumps.orig/Makefile	2022-05-07 10:24:05.857919202 +0200
++++ mumps/Makefile	2022-05-09 16:44:15.291392199 +0200
+@@ -80,7 +80,7 @@
+ sharedlibseq:
  
  libseqneeded:
- 	(cd libseq; $(MAKE))
-+	cp libseq/lib* $(libdir)
+-	(cd libseq; $(MAKE))
++	(cd libseq; $(MAKE) FPIC="$(FPIC_OPT)" )
+ 	(cp libseq/lib* $(libdir))
  
- # Build the libpord.a library and copy it into $(topdir)/lib
- $(libdir)/libpord$(PLAT).a:
+ libseqneededsharedlibseq:

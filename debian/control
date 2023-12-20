@@ -13,7 +13,7 @@ Build-Depends:
  libscalapack-mpi-dev (>= 2.0.2),
  libscotch-dev,
  mpi-default-dev
-Standards-Version: 4.6.0
+Standards-Version: 4.6.2
 Vcs-Git: https://salsa.debian.org/science-team/mumps.git
 Vcs-Browser: https://salsa.debian.org/science-team/mumps
 Homepage: http://mumps-solver.org/
@@ -24,7 +24,7 @@ Section: libdevel
 Multi-Arch: same
 Depends:
  libmumps-headers-dev (= ${source:Version}),
- libmumps-5.4 (= ${binary:Version}),
+ libmumps-5.6 (= ${binary:Version}),
  libscalapack-mpi-dev,
  mpi-default-dev,
  ${misc:Depends},
@@ -56,7 +56,7 @@ Multi-Arch: same
 Depends:
  libmumps-dev (= ${binary:Version}),
  libmumps-headers-dev (= ${source:Version}),
- libmumps-seq-5.4 (= ${binary:Version}),
+ libmumps-seq-5.6 (= ${binary:Version}),
  ${misc:Depends},
 Description: Direct linear systems solver - non-parallel development files
  MUMPS implements a direct solver for large sparse linear systems, with a
@@ -68,7 +68,7 @@ Description: Direct linear systems solver - non-parallel development files
  Unless you know that you specifically need this, then you almost
  certainly want the libmumps-dev package.
 
-Package: libmumps-5.4
+Package: libmumps-5.6
 Architecture: any
 Section: libs
 Multi-Arch: same
@@ -83,7 +83,7 @@ Description: Direct linear systems solver - parallel shared libraries
  operate on distributed matrices e.g. over a cluster.  It has Fortran and
  C interfaces, and can interface with ordering tools such as Scotch.
 
-Package: libmumps-seq-5.4
+Package: libmumps-seq-5.6
 Architecture: any
 Section: libs
 Multi-Arch: same
@@ -98,9 +98,9 @@ Description: Direct linear systems solver - non-parallel shared libraries
  .
  This package is built the MUMPS libseq dummy sequential MPI library.
  Unless you know that you specifically need this, then you almost
- certainly want the libmumps-5.4 package.
+ certainly want the libmumps-5.6 package.
 
-Package: libmumps-scotch-5.4
+Package: libmumps-scotch-5.6
 Architecture: any
 Section: libs
 Multi-Arch: same
@@ -122,7 +122,7 @@ Section: libdevel
 Multi-Arch: same
 Depends:
  libmumps-dev,
- libmumps-scotch-5.4 (= ${binary:Version}),
+ libmumps-scotch-5.6 (= ${binary:Version}),
  ${misc:Depends},
 Description: Direct linear systems solver - Scotch-version development files
  MUMPS implements a direct solver for large sparse linear systems, with a
@@ -133,7 +133,7 @@ Description: Direct linear systems solver - Scotch-version development files
  This package provides static libaries enabling reordering of data using
  SCOTCH.
 
-Package: libmumps-ptscotch-5.4
+Package: libmumps-ptscotch-5.6
 Architecture: any
 Section: libs
 Multi-Arch: same
@@ -156,7 +156,7 @@ Section: libdevel
 Multi-Arch: same
 Depends:
  libmumps-dev,
- libmumps-ptscotch-5.4 (= ${binary:Version}),
+ libmumps-ptscotch-5.6 (= ${binary:Version}),
  ${misc:Depends},
 Description: Direct linear systems solver - PTScotch-version development files
  MUMPS implements a direct solver for large sparse linear systems, with a
@@ -173,7 +173,7 @@ Section: libdevel
 Multi-Arch: same
 Depends:
  libmumps-headers-dev (= ${source:Version}),
- libmumps-64pord-5.4 (= ${binary:Version}),
+ libmumps-64pord-5.6 (= ${binary:Version}),
  libscalapack-mpi-dev,
  mpi-default-dev,
  ${misc:Depends},
@@ -192,7 +192,7 @@ Multi-Arch: same
 Depends:
  libmumps64-dev (= ${binary:Version}),
  libmumps-headers-dev (= ${source:Version}),
- libmumps-64pord-seq-5.4 (= ${binary:Version}),
+ libmumps-64pord-seq-5.6 (= ${binary:Version}),
  ${misc:Depends},
 Description: Direct linear systems solver (64 bit) - non-parallel development files
  MUMPS implements a direct solver for large sparse linear systems, with a
@@ -206,7 +206,7 @@ Description: Direct linear systems solver (64 bit) - non-parallel development fi
  .
  This package supports 64-bit ordering (-DPORD_INTSIZE64).
 
-Package: libmumps-64pord-5.4
+Package: libmumps-64pord-5.6
 Architecture: any
 Section: libs
 Multi-Arch: same
@@ -223,7 +223,7 @@ Description: Direct linear systems solver (64 bit) - parallel shared libraries
  .
  This package supports 64-bit ordering (-DPORD_INTSIZE64).
 
-Package: libmumps-64pord-seq-5.4
+Package: libmumps-64pord-seq-5.6
 Architecture: any
 Section: libs
 Multi-Arch: same
@@ -238,11 +238,11 @@ Description: Direct linear systems solver (64 bit) - non-parallel shared librari
  .
  This package is built the MUMPS libseq dummy sequential MPI library.
  Unless you know that you specifically need this, then you almost
- certainly want the libmumps-64pord-5.4 package.
+ certainly want the libmumps-64pord-5.6 package.
  .
  This package supports 64-bit ordering (-DPORD_INTSIZE64).
 
-Package: libmumps-64pord-scotch-5.4
+Package: libmumps-64pord-scotch-5.6
 Architecture: any
 Section: libs
 Multi-Arch: same
@@ -264,7 +264,7 @@ Section: libdevel
 Multi-Arch: same
 Depends:
  libmumps64-dev,
- libmumps-64pord-scotch-5.4 (= ${binary:Version}),
+ libmumps-64pord-scotch-5.6 (= ${binary:Version}),
  ${misc:Depends},
 Description: Direct linear systems solver (64 bit) - Scotch-version development files
  MUMPS implements a direct solver for large sparse linear systems, with a
@@ -275,7 +275,7 @@ Description: Direct linear systems solver (64 bit) - Scotch-version development 
  This package provides static libaries enabling reordering of data using
  SCOTCH. It supports 64-bit ordering (-DPORD_INTSIZE64).
 
-Package: libmumps-64pord-ptscotch-5.4
+Package: libmumps-64pord-ptscotch-5.6
 Architecture: any
 Section: libs
 Multi-Arch: same
@@ -297,7 +297,7 @@ Section: libdevel
 Multi-Arch: same
 Depends:
  libmumps64-dev,
- libmumps-64pord-ptscotch-5.4 (= ${binary:Version}),
+ libmumps-64pord-ptscotch-5.6 (= ${binary:Version}),
  ${misc:Depends},
 Description: Direct linear systems solver (64 bit) - PTScotch-version development files
  MUMPS implements a direct solver for large sparse linear systems, with a

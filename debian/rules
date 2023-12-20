@@ -5,6 +5,7 @@ include /usr/share/mpi-default-dev/debian_defaults
 export DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
+export DEB_BUILD_MAINT_OPTIONS=optimize=-lto
 
 HAS_GCC_10 := $(shell if [ `mpifort -dumpversion` -ge 10 ]; then echo yes; fi )
 ifeq (yes,$(HAS_GCC_10))
@@ -56,6 +57,7 @@ override_dh_auto_clean:
 	rm -rf lib Makefile.inc \
 	  libmumps libmumps_seq libmumps_scotch libmumps_ptscotch \
 	  libmumps64 libmumps64_seq libmumps64_scotch libmumps64_ptscotch
+	rm -f PORD/lib/libpord*.a
 
 override_dh_auto_build-indep:
 	cp -f debian/Makefile.par.inc Makefile.inc
@@ -65,47 +67,47 @@ override_dh_auto_build-arch:
 	mkdir lib
 	echo "Building 64-bit MUMPS using $(BUILD_FLAGS_64BIT)"
 	cp -f debian/Makefile.ptscotch.inc Makefile.inc
-	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) $(BUILD_FLAGS_64BIT) PLAT="_64pord_ptscotch" all
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) $(BUILD_FLAGS_64BIT) PLAT="_64pord_ptscotch" all allshared
 	cp -a lib libmumps64_ptscotch
 	$(MAKE) clean
 	rm -f Makefile.inc
 	cp -f debian/Makefile.scotch.inc Makefile.inc
-	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) $(BUILD_FLAGS_64BIT) PLAT="_64pord_scotch" all
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) $(BUILD_FLAGS_64BIT) PLAT="_64pord_scotch" all allshared
 	cp -a lib libmumps64_scotch
 	cp -af libseq/lib* libmumps64_scotch
 	$(MAKE) clean
 	rm -f Makefile.inc
 	cp -f debian/Makefile.seq.inc Makefile.inc
-	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) $(BUILD_FLAGS_64BIT) PLAT="_64pord_seq" all
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) $(BUILD_FLAGS_64BIT) PLAT="_64pord_seq" all allshared
 	cp -a lib libmumps64_seq
 	cp -af libseq/lib* libmumps64_seq
 	$(MAKE) clean
 	rm -f Makefile.inc
 	cp -f debian/Makefile.par.inc Makefile.inc
-	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) $(BUILD_FLAGS_64BIT) PLAT="_64pord" all
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) $(BUILD_FLAGS_64BIT) PLAT="_64pord" all allshared
 	cp -a lib libmumps64
 	echo "Building 32-bit MUMPS"
 	$(MAKE) clean
 	rm -f Makefile.inc
 	cp -f debian/Makefile.ptscotch.inc Makefile.inc
-	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) PLAT="_ptscotch" all
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) PLAT="_ptscotch" all allshared
 	cp -a lib libmumps_ptscotch
 	$(MAKE) clean
 	rm -f Makefile.inc
 	cp -f debian/Makefile.scotch.inc Makefile.inc
-	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) PLAT="_scotch" all
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) PLAT="_scotch" all allshared
 	cp -a lib libmumps_scotch
 	cp -af libseq/lib* libmumps_scotch
 	$(MAKE) clean
 	rm -f Makefile.inc
 	cp -f debian/Makefile.seq.inc Makefile.inc
-	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) PLAT="_seq" all
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) PLAT="_seq" all allshared
 	cp -a lib libmumps_seq
 	cp -af libseq/lib* libmumps_seq
 	$(MAKE) clean
 	rm -f Makefile.inc
 	cp -f debian/Makefile.par.inc Makefile.inc
-	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) all
+	$(MAKE) MUMPS_MPI=$(ARCH_DEFAULT_MPI_IMPL) $(BUILD_FLAGS_EXTRA) all allshared
 	cp -a lib libmumps
 
 ifeq (yes,$(findstring yes,$(RUNTEST)))
