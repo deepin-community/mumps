@@ -2,8 +2,8 @@ Create static and shared versions of the PORD library.
 
 Index: mumps/PORD/lib/Makefile
 ===================================================================
---- mumps.orig/PORD/lib/Makefile	2023-11-03 14:12:07.168161568 +0100
-+++ mumps/PORD/lib/Makefile	2023-11-03 14:12:07.164161533 +0100
+--- mumps.orig/PORD/lib/Makefile	2024-05-03 18:20:07.845727993 +0200
++++ mumps/PORD/lib/Makefile	2024-05-03 18:20:07.841727957 +0200
 @@ -1,7 +1,7 @@
  
  # To compile directly, uncomment the line below.
@@ -13,7 +13,7 @@ Index: mumps/PORD/lib/Makefile
  #
  # Otherwise, adequate variables for CC, CFLAGS, AR and
  # RANLIB must be passed to make.
-@@ -29,10 +29,12 @@
+@@ -31,10 +31,12 @@
  	$(RANLIB) $@
  
  libpord$(PLAT)$(LIBEXT_SHARED):$(OBJS)
@@ -30,8 +30,8 @@ Index: mumps/PORD/lib/Makefile
 +	rm -f *.o libpord$(PLAT)$(LIBEXT) libpord$(PLAT)*$(LIBEXT_SHARED)
 Index: mumps/Makefile
 ===================================================================
---- mumps.orig/Makefile	2023-11-03 14:12:07.168161568 +0100
-+++ mumps/Makefile	2023-11-03 14:12:23.240302577 +0100
+--- mumps.orig/Makefile	2024-05-03 18:20:07.845727993 +0200
++++ mumps/Makefile	2024-05-03 18:20:07.841727957 +0200
 @@ -91,7 +91,7 @@
  $(libdir)/libpord$(PLAT)$(LIBEXT):
  	if [ "$(LPORDDIR)" != "" ] ; then \

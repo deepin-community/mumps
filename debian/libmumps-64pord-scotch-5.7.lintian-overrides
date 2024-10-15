@@ -1,2 +1,6 @@
 # several variants of libmumps-64pord-scotch are provided by libmumps-64pord-scotch-*
 package-name-doesnt-match-sonames libcmumps-64pord-scotch-* libdmumps-64pord-scotch-* libmpiseq-64pord-scotch-* libmumps-common-64pord-scotch-* libpord-64pord-scotch-* libsmumps-64pord-scotch-* libzmumps-64pord-scotch-*
+
+# 64-bit mumps_scotch has been explicitly linked against 64-bit SCOTCH
+# RUNPATH is required to locate scotch-int64
+custom-library-search-path RUNPATH /usr/lib/*/scotch-int64 [usr/lib/*/lib*mumps*_64pord_scotch-*.so]

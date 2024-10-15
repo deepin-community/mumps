@@ -1,6 +1,6 @@
 #
-#  This file is part of MUMPS 5.6.2, released
-#  on Wed Oct 11 09:36:25 UTC 2023
+#  This file is part of MUMPS 5.7.3, released
+#  on Mon Jul 15 11:44:21 UTC 2024
 #
 topdir = .
 libdir = $(topdir)/lib

@@ -16,7 +16,7 @@ LSCOTCHDIR = /usr/lib
 ISCOTCH   = -I/usr/include/scotch
 
 #LSCOTCH   = -L$(LSCOTCHDIR) -lptesmumps -lptscotch -lptscotcherr
-LSCOTCH   = -L$(LSCOTCHDIR) -lesmumps -lscotch -lscotcherr
+LSCOTCH   = $(SCOTCH_EXTRA_FLAGS) -L$(LSCOTCHDIR) -lesmumps -lscotch -lscotcherr
 
 LPORDDIR = $(topdir)/PORD/lib/
 IPORD    = -I$(topdir)/PORD/include/
@@ -45,6 +45,7 @@ PLAT    =
 LIBEXT  = .a
 LIBEXT_SHARED  = .so
 SONAME = -soname
+SHARED_OPT = -shared
 FPIC_OPT = -fPIC
 OUTC    = -o 
 OUTF    = -o 

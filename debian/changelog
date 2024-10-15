@@ -1,3 +1,37 @@
+mumps (5.7.3-2) unstable; urgency=medium
+
+  * Team upload.
+  * Upload to unstable. Transition #1082552.
+
+ -- Drew Parsons <dparsons@debian.org>  Sat, 05 Oct 2024 10:57:42 +0200
+
+mumps (5.7.3-1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+  * Build the 64-bit mumps-scotch libraries against 64-bit scotch
+    (scotch-int64 for consistency with petsc64)
+    Add custom-library-search-path to lintian-overrides to
+    acknowledge explicit RUNPATH.
+  * Standards-Version: 4.7.0
+
+ -- Drew Parsons <dparsons@debian.org>  Sun, 25 Aug 2024 23:59:09 +0200
+
+mumps (5.7.1-1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release. New ABI 5.7.
+  * define SHARED_OPT = -shared in Makefile*.inc config files
+
+ -- Drew Parsons <dparsons@debian.org>  Fri, 03 May 2024 18:27:18 +0200
+
+mumps (5.6.2-2.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Rename libraries for 64-bit time_t transition.  Closes: #1063152
+
+ -- Benjamin Drung <bdrung@debian.org>  Wed, 28 Feb 2024 20:55:10 +0000
+
 mumps (5.6.2-2) unstable; urgency=medium
 
   * Team upload
