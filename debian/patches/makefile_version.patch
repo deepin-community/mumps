@@ -1,13 +1,13 @@
 Index: mumps/Makefile
 ===================================================================
---- mumps.orig/Makefile	2023-11-01 01:22:13.116334477 +0100
-+++ mumps/Makefile	2023-11-01 01:22:13.108334408 +0100
+--- mumps.orig/Makefile	2024-08-11 09:44:26.088606181 +0200
++++ mumps/Makefile	2024-08-11 09:44:26.076605986 +0200
 @@ -2,6 +2,9 @@
- #  This file is part of MUMPS 5.6.2, released
- #  on Wed Oct 11 09:36:25 UTC 2023
+ #  This file is part of MUMPS 5.7.3, released
+ #  on Mon Jul 15 11:44:21 UTC 2024
  #
-+export VERSION   = 5.6.1
-+export SOVERSION = 5.6
++export VERSION   = 5.7.1
++export SOVERSION = 5.7
 +
  topdir = .
  libdir = $(topdir)/lib

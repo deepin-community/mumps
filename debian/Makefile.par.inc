@@ -48,6 +48,7 @@ PLAT    =
 LIBEXT  = .a
 LIBEXT_SHARED  = .so
 SONAME = -soname
+SHARED_OPT = -shared
 FPIC_OPT = -fPIC
 OUTC    = -o 
 OUTF    = -o 
